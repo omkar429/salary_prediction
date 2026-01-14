@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  web_scrap:
+    cmd: python ./src/data_ing/web_scrap.py ./data/raw/
+    deps:
+    - path: ./src/data_ing/web_scrap.py
+      hash: md5
+      md5: 93350ee59453923f183e3d06574ee1aa
+      size: 1792
+    params:
+      params.yaml:
+        web_scrap.page_number: 2
+    outs:
+    - path: data/raw/
+      hash: md5
+      md5: 7f9ecab9e7659f1e32d6d8a9ee428ef4.dir
+      size: 1779
+      nfiles: 1

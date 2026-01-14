@@ -1,0 +1,10 @@
+stages:
+  web_scrap:
+    cmd: python ./src/data_ing/web_scrap.py ./data/raw/
+    deps:
+      - ./src/data_ing/web_scrap.py
+    params:
+      - web_scrap.page_number
+    outs:
+      - data/raw/
+    
