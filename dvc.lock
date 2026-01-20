@@ -5,14 +5,14 @@ stages:
     deps:
     - path: ./src/data_ing/web_scrap.py
       hash: md5
-      md5: 93350ee59453923f183e3d06574ee1aa
-      size: 1792
+      md5: 3954a6b21f22380e40de5d8b21e742e2
+      size: 1843
     params:
       params.yaml:
-        web_scrap.page_number: 2
+        web_scrap.page_number: 50
     outs:
     - path: data/raw/
       hash: md5
-      md5: 7f9ecab9e7659f1e32d6d8a9ee428ef4.dir
-      size: 1779
+      md5: 69f9caad3f6a1165c3a9f770c4200a1a.dir
+      size: 86484
       nfiles: 1

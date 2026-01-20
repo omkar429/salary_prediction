@@ -5,7 +5,7 @@ import pathlib
 import sys
 import yaml
 
-def web_scrape(page_number):
+def web_scrape(page_number) -> pd.DataFrame:
 
     company_names = []
     allas = []
@@ -42,12 +42,12 @@ def web_scrape(page_number):
 
     return df
 
-def save_data(data,path):
+def save_data(data: pd.DataFrame,path: str) -> None:
     pathlib.Path(path).mkdir(parents=True,exist_ok=True)
     data.to_csv(path / 'web_data.csv',index=False)
 
 
-def main():
+def main() -> None:
     home_path = pathlib.Path(__file__).parent.parent.parent
     data_path_file = sys.argv[1]
     params = yaml.safe_load(open('params.yaml'))['web_scrap']
