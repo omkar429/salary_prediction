@@ -4,9 +4,10 @@ on:
   push:
 
 jobs:
-  bulid:
+  build:
     - name: set machine
       runs-on: ubuntu-latest
+  steps:
     - name: checkout repro
       uses: actions/checkout@v3
 
