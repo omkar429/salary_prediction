@@ -5,14 +5,35 @@ stages:
     deps:
     - path: ./src/data_ing/web_scrap.py
       hash: md5
-      md5: 3954a6b21f22380e40de5d8b21e742e2
-      size: 1843
+      md5: 164df9442f114dc9a9b78c49c18c49c8
+      size: 2289
     params:
       params.yaml:
-        web_scrap.page_number: 50
+        web_scrap.page_number: 100
     outs:
     - path: data/raw/
       hash: md5
-      md5: 69f9caad3f6a1165c3a9f770c4200a1a.dir
-      size: 86484
+      md5: ff79b0caca769398c049917c72930aff.dir
+      size: 172989
       nfiles: 1
+  database:
+    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv ./data/harf_prose/
+    deps:
+    - path: ./data/raw/web_data.csv
+      hash: md5
+      md5: 7497c5db439f3464d0bcf1afebae4496
+      size: 172989
+    - path: ./src/data_ing_database/database.py
+      hash: md5
+      md5: 9755f4a5425b484270a35644574f2459
+      size: 2708
+    params:
+      params.yaml:
+        database.random_state: 42
+        database.test_size: 0.2
+    outs:
+    - path: data/harf_prose/
+      hash: md5
+      md5: 798324614c8bebc7bc8e3149de035ba0.dir
+      size: 87840
+      nfiles: 2

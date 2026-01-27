@@ -7,4 +7,15 @@ stages:
       - web_scrap.page_number
     outs:
       - data/raw/
+  database:
+    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv ./data/harf_prose/
+    deps:
+      - ./src/data_ing_database/database.py
+      - ./data/raw/web_data.csv 
+    params:
+      - database.test_size
+      - database.random_state
+    outs:
+      - data/harf_prose/
+
     

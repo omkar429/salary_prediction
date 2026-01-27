@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import pathlib
 import sys
 import yaml
+import mlflow
+import dagshub
+dagshub.init(repo_owner='omkar429', repo_name='salary_prediction', mlflow=True)
 
 def web_scrape(page_number) -> pd.DataFrame:
 
@@ -47,13 +50,21 @@ def save_data(data: pd.DataFrame,path: str) -> None:
     data.to_csv(path / 'web_data.csv',index=False)
 
 
+
 def main() -> None:
-    home_path = pathlib.Path(__file__).parent.parent.parent
-    data_path_file = sys.argv[1]
-    params = yaml.safe_load(open('params.yaml'))['web_scrap']
-    data_path = home_path / data_path_file
-    df = web_scrape(page_number=params['page_number'])
-    save_data(data=df, path=data_path)
+    mlflow.set_tracking_uri('https://dagshub.com/omkar429/salary_prediction.mlflow')
+    mlflow.set_experiment('salary_prediction')
+    with mlflow.start_run():
+
+        home_path = pathlib.Path(__file__).parent.parent.parent
+        data_path_file = sys.argv[1]
+        params = yaml.safe_load(open('params.yaml'))['web_scrap']
+        data_path = home_path / data_path_file
+        page_number = params['page_number']
+        mlflow.log_param('Page_number web scrape',page_number)
+        mlflow.log_artifact(__file__)
+        df = web_scrape(page_number=page_number)
+        save_data(data=df, path=data_path)
 
 
 if __name__ == '__main__':

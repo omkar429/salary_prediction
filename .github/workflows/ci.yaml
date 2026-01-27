@@ -1,0 +1,24 @@
+name: ci pipeline
+
+on:
+  push:
+
+jobs:
+  bulid:
+    - name: set machine
+      runs-on: ubuntu-latest
+    - name: checkout repro
+      uses: actions/checkout@v3
+
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+    - name: install dependes
+      runs: |
+        pip install -r requirements.txt
+    - name: run dvc pipeline
+      runs: |
+        dvc repro
+
+
