@@ -17,10 +17,10 @@ jobs:
         with:
           python-version: '3.11'
       - name: install dependes
-        runs: |
+        run: |
           pip install -r requirements.txt
       - name: run dvc pipeline
-        runs: |
+        run: |
           dvc repro
 
 
