@@ -9,7 +9,7 @@ import dagshub
 import os
 dagshub_token = os.getenv("SALARY")
 if not dagshub_token:
-    raise EnvironmentError("not found")
+    raise EnvironmentError("SALARY token not found")
 
 os.environ['MLFLOW_TRACKING_USERANAME'] = dagshub_token
 os.environ['MLFLOW_TRACKING_PASSWORD'] = dagshub_token
