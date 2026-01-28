@@ -15,7 +15,7 @@ os.environ['MLFLOW_TRACKING_USERANAME'] = dagshub_token
 os.environ['MLFLOW_TRACKING_PASSWORD'] = dagshub_token
 
 dagshub_url = "https://dagshub.com"
-repo_owner = "this project about the predict salary in company use raw data to find any commpany avg salary"
+repo_owner = "omkar429"
 repo_name = "salary_prediction"
 
 
