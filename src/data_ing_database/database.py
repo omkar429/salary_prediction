@@ -56,7 +56,6 @@ def save_data(path: str, train: pd.DataFrame, test: pd.DataFrame) -> None:
     test.to_csv(path / 'test.csv',index=False)
 
 def main():
-    mlflow.set_experiment('salary_prediction')
     with mlflow.start_run():
         curr_path = pathlib.Path(__file__)
         main_path = curr_path.parent.parent.parent

@@ -63,7 +63,6 @@ def save_data(data: pd.DataFrame,path: str) -> None:
 
 
 def main() -> None:
-    mlflow.set_experiment('salary_prediction')
     with mlflow.start_run():
 
         home_path = pathlib.Path(__file__).parent.parent.parent
