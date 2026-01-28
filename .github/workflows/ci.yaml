@@ -22,7 +22,7 @@ jobs:
           pip install dvc
       - name: run dvc pipeline
         env:
-          DAGSHUB_PAT:  ${{ secrets.SALARY}}
+          SALARY:  ${{ secrets.SALARY}}
         run: |
           dvc repro
 
