@@ -7,16 +7,10 @@ import yaml
 import mlflow
 import dagshub
 import os
-dagshub_token = os.getenv("SALARY")
-if not dagshub_token:
-    raise EnvironmentError("SALARY token not found")
 
-os.environ['MLFLOW_TRACKING_USERANAME'] = dagshub_token
-os.environ['MLFLOW_TRACKING_PASSWORD'] = dagshub_token
 
-dagshub_url = "https://dagshub.com"
-repo_owner = "omkar429"
-repo_name = "salary_prediction"
+import dagshub
+dagshub.init(repo_owner='omkar429', repo_name='salary_prediction', mlflow=True)
 
 
 def web_scrape(page_number) -> pd.DataFrame:
@@ -63,6 +57,7 @@ def save_data(data: pd.DataFrame,path: str) -> None:
 
 
 def main() -> None:
+    mlflow.set_tracking_uri('https://dagshub.com/omkar429/salary_prediction.mlflow')
     with mlflow.start_run():
 
         home_path = pathlib.Path(__file__).parent.parent.parent

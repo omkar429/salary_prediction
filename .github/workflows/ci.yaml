@@ -19,11 +19,14 @@ jobs:
       - name: install dependes
         run: |
           pip install -r requirements.txt
-          pip install dvc
-      - name: run dvc pipeline
-        env:
-          SALARY:  ${{ secrets.SALARY}}
+      - name: run app.py
         run: |
-          dvc repro
+          python app.py
+      #     pip install dvc
+      # - name: run dvc pipeline
+      #   env:
+      #     SALARY:  ${{ secrets.SALARY }}
+      #   run: |
+      #     dvc repro
 
 
