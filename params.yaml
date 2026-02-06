@@ -1,5 +1,5 @@
 web_scrap:
-  page_number: 498
+  page_number: 40
 
 database:
   test_size: 0.2
