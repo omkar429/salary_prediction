@@ -18,4 +18,11 @@ stages:
     outs:
       - data/harf_prose/
 
+  preprocessing:
+    cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv ./data/harf_prose/test.csv ./data/processed/
+    deps: 
+      - ./src/data_prepro/preprocessing.py
+      - ./data/harf_prose/
+    outs: 
+      - data/processed/
     
