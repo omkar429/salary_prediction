@@ -7,6 +7,13 @@ import yaml
 import mlflow
 import dagshub
 import os
+import sys
+
+
+
+if os.getenv("CI") == "true":
+    print("CI environment detected → skipping web scraping")
+    sys.exit(0)
 
 
 
