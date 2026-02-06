@@ -52,7 +52,7 @@ def save_data(data: pd.DataFrame,path: str) -> None:
     data.to_csv(path / 'web_data.csv',index=False)
 
 
-
+# main 
 def main() -> None:
     mlflow.set_experiment('salary')
     with mlflow.start_run():
