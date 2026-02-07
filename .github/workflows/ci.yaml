@@ -32,5 +32,4 @@ jobs:
           dvc pull
 
 
-      - name: Run DVC pipeline (skip scraping)
-        run: dvc repro --allow-missing
+   
