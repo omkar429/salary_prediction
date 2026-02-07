@@ -10,10 +10,12 @@ import os
 import sys
 
 
+output_dir = "./data/raw"
 
-
-
-    
+if os.getenv("CI") == "true":
+    print("CI environment detected → skipping web scraping")
+    os.makedirs(output_dir, exist_ok=True)  # <-- ensures DVC stage has output
+    sys.exit(0)
 
 def web_scrape(page_number) -> pd.DataFrame:
 
