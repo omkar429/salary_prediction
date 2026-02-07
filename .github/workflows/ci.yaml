@@ -22,10 +22,13 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: dvc pull
+        run: |
+          dvc pull
+
 
       - name: run dvc
         run: |
-          export CI=true
           dvc repro
      
 

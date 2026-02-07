@@ -59,12 +59,15 @@ def replace_salary_car(df: pd.DataFrame) -> pd.DataFrame:
         elif '--' in i:
             n = i.replace('--','0')
             n = float(n)
-            n = n * 100000
+            b.append(n)
+        elif ' ' in i:
+            n = i.replace(' ','0')
+            n = float(n)
             b.append(n)
         else:
             b.append(i)
     df['Salaries'] = b
-    df['Salaries'] = df.drop(index=952)['Salaries'].astype(float)
+    df['Salaries'] = df['Salaries'].astype(float)
     return df
     
 
