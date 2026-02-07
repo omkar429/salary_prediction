@@ -1,0 +1,14 @@
+artifact_uri: file:///E:/All%20Project/salary_prediction/mlruns/713554018750395891/c785181127f744dd8bfbcfcc6ab28abf/artifacts
+end_time: 1770459019927
+entry_point_name: ''
+experiment_id: '713554018750395891'
+lifecycle_stage: active
+run_id: c785181127f744dd8bfbcfcc6ab28abf
+run_name: bemused-ant-197
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1770459019803
+status: 3
+tags: []
+user_id: acer
