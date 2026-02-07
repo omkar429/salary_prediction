@@ -32,7 +32,6 @@ jobs:
           dvc pull
 
 
-      - name: Reproduce DVC pipeline
-        run: dvc repro
-        env:
-          SKIP_PREPROCESS: 1
+      - name: Run DVC pipeline (skip scraping)
+        run: |
+          dvc repro --ignore-missing-imports
