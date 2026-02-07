@@ -1,21 +1,29 @@
 stages:
-  database:
-    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv 
-      ./data/harf_prose/
+  web_scrap:
+    cmd: python ./src/data_ing/web_scrap.py ./data/raw/
     deps:
-    - ./src/data_ing_database/database.py
-    - ./data/raw/web_data.csv
+      - ./src/data_ing/web_scrap.py
     params:
-    - database.test_size
-    - database.random_state
+      - web_scrap.page_number
     outs:
-    - data/harf_prose/
+      - data/raw/
+
+  database:
+    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv ./data/harf_prose/
+    deps:
+      - ./src/data_ing_database/database.py
+      - ./data/raw/web_data.csv 
+    params:
+      - database.test_size
+      - database.random_state
+    outs:
+      - data/harf_prose/
 
   preprocessing:
-    cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv 
-      ./data/harf_prose/test.csv ./data/processed/
-    deps:
-    - ./src/data_prepro/preprocessing.py
-    - ./data/harf_prose/
-    outs:
-    - data/processed/
+    cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv ./data/harf_prose/test.csv ./data/processed/
+    deps: 
+      - ./src/data_prepro/preprocessing.py
+      - ./data/harf_prose/
+    outs: 
+      - data/processed/
+    

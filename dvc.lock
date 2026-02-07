@@ -15,11 +15,11 @@ stages:
     params:
       params.yaml:
         database.random_state: 42
-        database.test_size: 0.3
+        database.test_size: 0.2
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: ca538dd1aec63d0c01ae4d8c6ffbd470.dir
+      md5: dc05919fdf02724f5b29f8506506c349.dir
       size: 327640
       nfiles: 2
   preprocessing:
