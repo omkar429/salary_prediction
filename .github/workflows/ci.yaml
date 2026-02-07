@@ -32,9 +32,7 @@ jobs:
           dvc pull
 
 
-      - name: run dvc
-        run: |
-          dvc repro
-     
-
-
+      - name: Reproduce DVC pipeline
+        run: dvc repro
+        env:
+          SKIP_PREPROCESS: 1

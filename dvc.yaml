@@ -7,6 +7,8 @@ stages:
       - web_scrap.page_number
     outs:
       - data/raw/
+    always_changed: true
+    
   database:
     cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv ./data/harf_prose/
     deps:
