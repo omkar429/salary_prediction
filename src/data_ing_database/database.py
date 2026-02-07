@@ -39,7 +39,7 @@ def train_test(df: pd.DataFrame, test_size, random_state) -> pd.DataFrame:
     train, test = train_test_split(df,test_size=test_size, random_state=random_state)
     return train, test
 
-# saave data
+# save data
 def save_data(path: str, train: pd.DataFrame, test: pd.DataFrame) -> None:
     pathlib.Path(path).mkdir(parents=True,exist_ok=True)
     train.to_csv(path / 'train.csv',index=False)
