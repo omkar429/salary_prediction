@@ -33,5 +33,4 @@ jobs:
 
 
       - name: Run DVC pipeline (skip scraping)
-        run: |
-          dvc repro --ignore-missing-imports
+        run: dvc repro --allow-missing
