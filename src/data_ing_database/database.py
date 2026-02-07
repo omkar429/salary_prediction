@@ -13,6 +13,10 @@ def load_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path)
     return df
 
+def drop(data: pd.DataFrame) -> pd.DataFrame:
+    data.dropna(inplace=True)
+    return data
+
 
 # drop Duplicated data
 def drop_duplicates(data: pd.DataFrame) -> pd.DataFrame:
@@ -64,6 +68,7 @@ def main():
 
         
         df = load_data(data_path)
+        df = drop(data=df)
         df = drop_duplicates(df)
         df = data_corect(df)
         df = drop_columns(df)

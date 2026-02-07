@@ -6,21 +6,21 @@ stages:
     deps:
     - path: ./data/raw/web_data.csv
       hash: md5
-      md5: 1362ef46e16c4a923ba9d9d5d8e1480e
-      size: 421079
+      md5: 79ea93ff9ea55362e7973d7dd663fc82
+      size: 657323
     - path: ./src/data_ing_database/database.py
       hash: md5
-      md5: 58ed9790da76e27f5fd25b7c73e83496
-      size: 2541
+      md5: ca0e02d1325d374856706e28d7e1166c
+      size: 2666
     params:
       params.yaml:
         database.random_state: 42
-        database.test_size: 0.2
+        database.test_size: 0.3
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: f4f628ad8cbaaff008d91fff65f77000.dir
-      size: 210888
+      md5: ca538dd1aec63d0c01ae4d8c6ffbd470.dir
+      size: 327640
       nfiles: 2
   preprocessing:
     cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv 
