@@ -11,10 +11,6 @@ import sys
 
 
 
-
-
-    
-
 def web_scrape(page_number) -> pd.DataFrame:
 
     company_names = []
@@ -59,18 +55,16 @@ def save_data(data: pd.DataFrame,path: str) -> None:
 
 # main 
 def main() -> None:
-    mlflow.set_experiment('salary')
-    with mlflow.start_run():
 
-        home_path = pathlib.Path(__file__).parent.parent.parent
-        data_path_file = sys.argv[1]
-        params = yaml.safe_load(open('params.yaml'))['web_scrap']
-        data_path = home_path / data_path_file
-        page_number = params['page_number']
-        mlflow.log_param('Page_number web scrape',page_number)
-        mlflow.log_artifact(__file__)
-        df = web_scrape(page_number=page_number)
-        save_data(data=df, path=data_path)
+
+    home_path = pathlib.Path(__file__).parent.parent.parent
+    data_path_file = sys.argv[1]
+    params = yaml.safe_load(open('params.yaml'))['web_scrap']
+    data_path = home_path / data_path_file
+    page_number = params['page_number']
+   
+    df = web_scrape(page_number=page_number)
+    save_data(data=df, path=data_path)
 
 
 if __name__ == '__main__':

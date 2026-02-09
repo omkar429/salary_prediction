@@ -27,7 +27,7 @@ def change_into_cat(df):
 
 # remove chairecter
 def remove_car(df: str) -> pd.DataFrame:
-    df['Reviews'] = df['Reviews'].apply(lambda x: str(x) if pd.notnull(x) else '0')
+    df['Reviews'] = df['Reviews'].str.replace('k','')
     df['Reviews'] = df['Reviews'].str.replace('L','')
     df['Reviews'] = df['Reviews'].str.replace('--','')
     df['Reviews'] = df['Reviews'].str.replace(' ','0')

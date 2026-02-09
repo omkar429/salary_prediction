@@ -50,30 +50,25 @@ def save_data(path: str, train: pd.DataFrame, test: pd.DataFrame) -> None:
     test.to_csv(path / 'test.csv',index=False)
 
 def main():
-    mlflow.set_experiment('salary')
 
-    with mlflow.start_run():
-        curr_path = pathlib.Path(__file__)
-        main_path = curr_path.parent.parent.parent
-        data_file_path = sys.argv[1]
-        data_path = main_path / data_file_path
-        save_data_flie = sys.argv[2]
-        save_data_path = main_path / save_data_flie
-        params = yaml.safe_load(open('params.yaml'))['database']
-        test_size = params['test_size']
-        random_state = params['random_state']
-        mlflow.log_param('test_size',test_size)
-        mlflow.log_param('random_state',random_state)
-        mlflow.log_artifact(__file__)
-
+    curr_path = pathlib.Path(__file__)
+    main_path = curr_path.parent.parent.parent
+    data_file_path = sys.argv[1]
+    data_path = main_path / data_file_path
+    save_data_flie = sys.argv[2]
+    save_data_path = main_path / save_data_flie
+    params = yaml.safe_load(open('params.yaml'))['database']
+    test_size = params['test_size']
+    random_state = params['random_state']
+       
         
-        df = load_data(data_path)
-        df = drop(data=df)
-        df = drop_duplicates(df)
-        df = data_corect(df)
-        df = drop_columns(df)
-        train, test = train_test(df,test_size=test_size, random_state=random_state)
-        save_data(train=train, test=test, path=save_data_path)
+    df = load_data(data_path)
+    df = drop(data=df)
+    df = drop_duplicates(df)
+    df = data_corect(df)
+    df = drop_columns(df)
+    train, test = train_test(df,test_size=test_size, random_state=random_state)
+    save_data(train=train, test=test, path=save_data_path)
 
 
 if __name__ == '__main__':
