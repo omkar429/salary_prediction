@@ -35,6 +35,9 @@ stages:
       - make_model
     outs:
       - models/cat/
- 
-
-    
+  log:
+    cmd: python ./src/log_params/log.py ./data/processed/preprocessing_test.csv ./models/cat/my_model.pkl
+    deps: 
+      - ./src/log_params/log.py
+      - ./data/processed/preprocessing_test.csv
+      - ./models/cat/catmodel.joblib

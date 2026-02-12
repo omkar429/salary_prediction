@@ -5,6 +5,7 @@ import pathlib
 import joblib
 import sys
 import yaml
+import pickle
 
 def load_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path)
@@ -40,7 +41,8 @@ def modelsa(pairamiter_grid, X_train, y_train):
 def save_model(path, model):
     path = pathlib.Path(path)        
     path.mkdir(parents=True, exist_ok=True) 
-    joblib.dump(model, path / 'catmodel.joblib')
+    with open(path /"my_model.pkl", "wb") as f:
+        pickle.dump(model, f)
 
 def main():
     main_path = pathlib.Path(__file__).parent.parent.parent

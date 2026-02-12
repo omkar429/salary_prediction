@@ -14,11 +14,11 @@ stages:
     params:
       params.yaml:
         database.random_state: 44
-        database.test_size: 0.3
+        database.test_size: 0.2
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: 25d33f83a4939c9b04ab1575c58f63bc.dir
+      md5: 7aac3a6c544206bedf4f319948f95e30.dir
       size: 47941
       nfiles: 2
   preprocessing:
@@ -27,7 +27,7 @@ stages:
     deps:
     - path: ./data/harf_prose/
       hash: md5
-      md5: 25d33f83a4939c9b04ab1575c58f63bc.dir
+      md5: 7aac3a6c544206bedf4f319948f95e30.dir
       size: 47941
       nfiles: 2
     - path: ./src/data_prepro/preprocessing.py
@@ -37,7 +37,7 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: 431ef9dcc8fc19b0466e8c15a199f26c.dir
+      md5: 1989d445a8c517ada34219bda9eadd0f.dir
       size: 44084
       nfiles: 2
   web_scrap:
@@ -56,12 +56,12 @@ stages:
     deps:
     - path: ./data/processed/preprocessing_train.csv
       hash: md5
-      md5: 12bcde33a6b81a34780ef1ae452c7abb
-      size: 30753
+      md5: 1248e53a49e3dfed7f6eb3cb7326837c
+      size: 35082
     - path: ./src/model/make_model.py
       hash: md5
-      md5: 9b58fa7b36fa8a4fd5260852e075781a
-      size: 1921
+      md5: 3027fc0ddae62d80e8383a3ae557f2ef
+      size: 1966
     params:
       params.yaml:
         make_model:
@@ -87,6 +87,21 @@ stages:
     outs:
     - path: models/cat/
       hash: md5
-      md5: f6db38c8e89821d61715d64ce56da27a.dir
-      size: 14403869
+      md5: 2b0f1f4ec38489ed79f174726f8b3da9.dir
+      size: 1107885
       nfiles: 1
+  log:
+    cmd: python ./src/log_params/log.py ./data/processed/preprocessing_test.csv ./models/cat/catmodel.joblib
+    deps:
+    - path: ./data/processed/preprocessing_test.csv
+      hash: md5
+      md5: 2f3b92df9c72f5dfbdd28089a6051ede
+      size: 13331
+    - path: ./models/cat/catmodel.joblib
+      hash: md5
+      md5: 7d0b11ea9c2ca45e6f56c9e5df9c7ddc
+      size: 14403869
+    - path: ./src/log_params/log.py
+      hash: md5
+      md5: 70d6fc1cf45229c4b18cea3ee5bf8398
+      size: 1278
