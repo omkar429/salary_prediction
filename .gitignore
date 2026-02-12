@@ -1,6 +1,7 @@
 # Data
 salary-venv/
 mlruns/
+notebooks/
 
 # Mac OS-specific storage files
 .DS_Store

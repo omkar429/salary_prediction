@@ -14,12 +14,12 @@ stages:
       size: 2399
     params:
       params.yaml:
-        database.random_state: 42
-        database.test_size: 0.5
+        database.random_state: 44
+        database.test_size: 0.2
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: 35def325b2c3a9e254b606408012e81b.dir
+      md5: 6372436bc789024bf9a929c04030471a.dir
       size: 400714
       nfiles: 2
   preprocessing:
@@ -28,7 +28,7 @@ stages:
     deps:
     - path: ./data/harf_prose/
       hash: md5
-      md5: 35def325b2c3a9e254b606408012e81b.dir
+      md5: 6372436bc789024bf9a929c04030471a.dir
       size: 400714
       nfiles: 2
     - path: ./src/data_prepro/preprocessing.py
@@ -38,7 +38,7 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: 83a9f0d3da1ca997d37d9f6b5057d07a.dir
+      md5: 805fb999881901ff410c89d2ca2a9051.dir
       size: 368440
       nfiles: 2
   web_scrap:
