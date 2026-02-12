@@ -1,13 +1,12 @@
 schema: '2.0'
 stages:
   database:
-    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv 
-      ./data/harf_prose/
+    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv ./data/harf_prose/
     deps:
     - path: ./data/raw/web_data.csv
       hash: md5
-      md5: 8ee368793ae0c8d963f2a3eaee5944dd
-      size: 846223
+      md5: 69a16be36f873d580c9fade1802d8c22
+      size: 101505
     - path: ./src/data_ing_database/database.py
       hash: md5
       md5: 77189792077537c37b3246a2eb46b574
@@ -15,21 +14,21 @@ stages:
     params:
       params.yaml:
         database.random_state: 44
-        database.test_size: 0.2
+        database.test_size: 0.3
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: 6372436bc789024bf9a929c04030471a.dir
-      size: 400714
+      md5: 25d33f83a4939c9b04ab1575c58f63bc.dir
+      size: 47941
       nfiles: 2
   preprocessing:
-    cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv 
-      ./data/harf_prose/test.csv ./data/processed/
+    cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv ./data/harf_prose/test.csv
+      ./data/processed/
     deps:
     - path: ./data/harf_prose/
       hash: md5
-      md5: 6372436bc789024bf9a929c04030471a.dir
-      size: 400714
+      md5: 25d33f83a4939c9b04ab1575c58f63bc.dir
+      size: 47941
       nfiles: 2
     - path: ./src/data_prepro/preprocessing.py
       hash: md5
@@ -38,8 +37,8 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: 805fb999881901ff410c89d2ca2a9051.dir
-      size: 368440
+      md5: 431ef9dcc8fc19b0466e8c15a199f26c.dir
+      size: 44084
       nfiles: 2
   web_scrap:
     cmd: python ./src/data_ing/web_scrap.py ./data/raw/
@@ -50,4 +49,44 @@ stages:
       size: 1950
     params:
       params.yaml:
-        web_scrap.page_number: 488
+        web_scrap.page_number: 499
+  make_model:
+    cmd: python ./src/model/make_model.py ./data/processed/preprocessing_train.csv
+      ./models/cat
+    deps:
+    - path: ./data/processed/preprocessing_train.csv
+      hash: md5
+      md5: 12bcde33a6b81a34780ef1ae452c7abb
+      size: 30753
+    - path: ./src/model/make_model.py
+      hash: md5
+      md5: 9b58fa7b36fa8a4fd5260852e075781a
+      size: 1921
+    params:
+      params.yaml:
+        make_model:
+          iterations:
+          - 500
+          - 1000
+          depth:
+          - 4
+          - 6
+          - 10
+          learning_rate:
+          - 0.01
+          - 0.05
+          - 0.1
+          l2_leaf_reg:
+          - 1
+          - 3
+          - 5
+          border_count:
+          - 32
+          - 64
+          - 128
+    outs:
+    - path: models/cat/
+      hash: md5
+      md5: f6db38c8e89821d61715d64ce56da27a.dir
+      size: 14403869
+      nfiles: 1

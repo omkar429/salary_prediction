@@ -27,13 +27,14 @@ stages:
       - data/processed/
 
   make_model:
-    cmd: python ./src/model/make_model.py ./data/processed/preprocessing_train.csv models
+    cmd: python ./src/model/make_model.py ./data/processed/preprocessing_train.csv ./models/cat
     deps:
       - ./src/model/make_model.py
       - ./data/processed/preprocessing_train.csv
     params:
       - make_model
     outs:
-     - models
+      - models/cat/
+ 
 
     

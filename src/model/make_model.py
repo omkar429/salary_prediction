@@ -1,6 +1,6 @@
 import catboost
 import pandas as pd
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RandomizedSearchCV
 import pathlib
 import joblib
 import sys
@@ -18,15 +18,17 @@ def make_pairam(iterations,depth,learning_rate,l2_leaf_reg,border_count):
         'learning_rate':learning_rate,
         'l2_leaf_reg': l2_leaf_reg,
         'border_count': border_count
+        
 
     }
+    print(pairamiter_grid)
     return pairamiter_grid
 
 
-def models(pairamiter_grid, X_train, y_train):
-    grid = GridSearchCV(
-        estimator=catboost.CatBoostRegressor(),
-        param_grid=pairamiter_grid,
+def modelsa(pairamiter_grid, X_train, y_train):
+    grid = RandomizedSearchCV(
+        estimator=catboost.CatBoostRegressor(random_state=42, verbose=0),
+        param_distributions=pairamiter_grid,
         n_jobs=-1,
         verbose=0,
         cv=4
@@ -35,9 +37,10 @@ def models(pairamiter_grid, X_train, y_train):
     model = grid.best_estimator_
     return model
 
-def save_model(path,model):
-    pathlib.Path(path).mkdir(exist_ok=True,parents=True)
-    joblib.dump(model, path / 'test.pkl')
+def save_model(path, model):
+    path = pathlib.Path(path)        
+    path.mkdir(parents=True, exist_ok=True) 
+    joblib.dump(model, path / 'catmodel.joblib')
 
 def main():
     main_path = pathlib.Path(__file__).parent.parent.parent
@@ -53,11 +56,15 @@ def main():
     X_train = train.drop(columns='remainder__Salaries')
     y_train = train['remainder__Salaries']
 
-    model = models(pairamiter_grid=pairam_grid,X_train=X_train,y_train=y_train)
+    model = modelsa(pairamiter_grid=pairam_grid,X_train=X_train,y_train=y_train)
 
     model_file = sys.argv[2]
     model_path = main_path / model_file
 
     save_model(path=model_path,model=model)
+
+
+if __name__ == '__main__':
+    main()
 
 
