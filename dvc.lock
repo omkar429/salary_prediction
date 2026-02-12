@@ -6,8 +6,8 @@ stages:
     deps:
     - path: ./data/raw/web_data.csv
       hash: md5
-      md5: 9ebc525c552a415aca9155e4e6ffb3f9
-      size: 865201
+      md5: 8ee368793ae0c8d963f2a3eaee5944dd
+      size: 846223
     - path: ./src/data_ing_database/database.py
       hash: md5
       md5: 77189792077537c37b3246a2eb46b574
@@ -15,12 +15,12 @@ stages:
     params:
       params.yaml:
         database.random_state: 42
-        database.test_size: 0.3
+        database.test_size: 0.5
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: cf403abc26a14d05dd929cd1f3e1ea02.dir
-      size: 433867
+      md5: 35def325b2c3a9e254b606408012e81b.dir
+      size: 400714
       nfiles: 2
   preprocessing:
     cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv 
@@ -28,18 +28,18 @@ stages:
     deps:
     - path: ./data/harf_prose/
       hash: md5
-      md5: cf403abc26a14d05dd929cd1f3e1ea02.dir
-      size: 433867
+      md5: 35def325b2c3a9e254b606408012e81b.dir
+      size: 400714
       nfiles: 2
     - path: ./src/data_prepro/preprocessing.py
       hash: md5
-      md5: 0f0216ebf4755027132ceec90fcb536d
-      size: 5902
+      md5: ae5f00f4595bdf5088b744a1b0e5b07b
+      size: 6112
     outs:
     - path: data/processed/
       hash: md5
-      md5: 6162e7cea915d58e6832bc44df230c17.dir
-      size: 227270804
+      md5: 83a9f0d3da1ca997d37d9f6b5057d07a.dir
+      size: 368440
       nfiles: 2
   web_scrap:
     cmd: python ./src/data_ing/web_scrap.py ./data/raw/
@@ -50,4 +50,4 @@ stages:
       size: 1950
     params:
       params.yaml:
-        web_scrap.page_number: 499
+        web_scrap.page_number: 488

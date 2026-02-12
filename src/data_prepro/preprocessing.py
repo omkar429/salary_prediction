@@ -10,6 +10,12 @@ def load_data(path: str) -> pd.DataFrame:
     return data
 
 
+# drop columns
+def drop_columns(df:pd.DataFrame) -> pd.DataFrame:
+    df.drop(columns='company_names',inplace=True)
+    return df
+
+
 # Change company_reviews ing to catagorical
 def change_into_cat(df):
     a = []
@@ -190,6 +196,9 @@ def main():
 
     train = load_data(path=train_path)
     test = load_data(path=test_path)
+
+    train = drop_columns(df=train)
+    test = drop_columns(df=test)
 
     train = change_into_cat(df=train)
     test = change_into_cat(df=test)
