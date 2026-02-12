@@ -25,4 +25,15 @@ stages:
       - ./data/harf_prose/
     outs: 
       - data/processed/
+
+  make_model:
+    cmd: python ./src/model/make_model.py ./data/processed/preprocessing_train.csv models
+    deps:
+      - ./src/model/make_model.py
+      - ./data/processed/preprocessing_train.csv
+    params:
+      - make_model
+    outs:
+     - models
+
     
