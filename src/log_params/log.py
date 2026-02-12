@@ -6,13 +6,15 @@ import numpy as np
 import pathlib
 import sys
 import pickle
+from catboost import CatBoostRegressor
 
 
 def load_model(path: str) -> pd.DataFrame:
     model = joblib.load(path)
-    with open(path, "rb") as f:
-        loaded_model = pickle.load(f)
-    return loaded_model
+    # model = CatBoostRegressor()
+    # model.load_model(path,format="cbm")
+    
+    return model
 
 
 def load_data(path: str) -> pd.DataFrame:
@@ -22,7 +24,7 @@ def load_data(path: str) -> pd.DataFrame:
 
 def log_metrics(model, X_test, y_test) -> None:
     with mlflow.start_run():
-        y_pre = model.predict(X_test,y_test)
+        y_pre = model.predict(X_test)
         r2 = r2_score(y_test,y_pre)
         mae = mean_absolute_error(y_test,y_pre)
         mse = mean_squared_error(y_test,y_pre)

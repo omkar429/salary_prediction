@@ -5,8 +5,8 @@ stages:
     deps:
     - path: ./data/raw/web_data.csv
       hash: md5
-      md5: 69a16be36f873d580c9fade1802d8c22
-      size: 101505
+      md5: 03c9f8d9cb6d31797d726f31a6a29b55
+      size: 223140
     - path: ./src/data_ing_database/database.py
       hash: md5
       md5: 77189792077537c37b3246a2eb46b574
@@ -14,12 +14,12 @@ stages:
     params:
       params.yaml:
         database.random_state: 44
-        database.test_size: 0.2
+        database.test_size: 0.3
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: 7aac3a6c544206bedf4f319948f95e30.dir
-      size: 47941
+      md5: c96ce1f4191d68f7221967072439468b.dir
+      size: 112089
       nfiles: 2
   preprocessing:
     cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv ./data/harf_prose/test.csv
@@ -27,8 +27,8 @@ stages:
     deps:
     - path: ./data/harf_prose/
       hash: md5
-      md5: 7aac3a6c544206bedf4f319948f95e30.dir
-      size: 47941
+      md5: c96ce1f4191d68f7221967072439468b.dir
+      size: 112089
       nfiles: 2
     - path: ./src/data_prepro/preprocessing.py
       hash: md5
@@ -37,8 +37,8 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: 1989d445a8c517ada34219bda9eadd0f.dir
-      size: 44084
+      md5: 90a1bdf90da1ca4455b65317f9befbd8.dir
+      size: 105478
       nfiles: 2
   web_scrap:
     cmd: python ./src/data_ing/web_scrap.py ./data/raw/
@@ -49,19 +49,19 @@ stages:
       size: 1950
     params:
       params.yaml:
-        web_scrap.page_number: 499
+        web_scrap.page_number: 498
   make_model:
     cmd: python ./src/model/make_model.py ./data/processed/preprocessing_train.csv
       ./models/cat
     deps:
     - path: ./data/processed/preprocessing_train.csv
       hash: md5
-      md5: 1248e53a49e3dfed7f6eb3cb7326837c
-      size: 35082
+      md5: f5b563594f61ae39a62407ff457453e4
+      size: 73782
     - path: ./src/model/make_model.py
       hash: md5
-      md5: 3027fc0ddae62d80e8383a3ae557f2ef
-      size: 1966
+      md5: cba9038969d537b7c61329e6a7b90b56
+      size: 2105
     params:
       params.yaml:
         make_model:
@@ -85,10 +85,10 @@ stages:
           - 64
           - 128
     outs:
-    - path: models/cat/
+    - path: ./models/cat/
       hash: md5
-      md5: 2b0f1f4ec38489ed79f174726f8b3da9.dir
-      size: 1107885
+      md5: e8614a9982b1ea298ebc8ebf6a5204a4.dir
+      size: 1072
       nfiles: 1
   log:
     cmd: python ./src/log_params/log.py ./data/processed/preprocessing_test.csv ./models/cat/catmodel.joblib

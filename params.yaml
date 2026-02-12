@@ -1,8 +1,8 @@
 web_scrap:
-  page_number: 499
+  page_number: 498
 
 database:
-  test_size: 0.2
+  test_size: 0.3
   random_state: 44
 
 
