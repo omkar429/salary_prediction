@@ -36,7 +36,7 @@ stages:
     outs:
       - ./models/cat/
   log:
-    cmd: python ./src/log_params/log.py ./data/processed/preprocessing_test.csv ./models/cat/model_test.joblib
+    cmd: python ./src/log_params/log.py ./models/cat/model_test.joblib ./data/processed/preprocessing_test.csv 
     deps: 
       - ./src/log_params/log.py
       - ./data/processed/preprocessing_test.csv

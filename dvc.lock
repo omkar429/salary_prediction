@@ -60,13 +60,15 @@ stages:
       size: 73782
     - path: ./src/model/make_model.py
       hash: md5
-      md5: cba9038969d537b7c61329e6a7b90b56
-      size: 2105
+      md5: b48dcecc17664524333da0be09a14a8d
+      size: 1990
     params:
       params.yaml:
         make_model:
           iterations:
           - 500
+          - 200
+          - 300
           - 1000
           depth:
           - 4
@@ -87,21 +89,21 @@ stages:
     outs:
     - path: ./models/cat/
       hash: md5
-      md5: e8614a9982b1ea298ebc8ebf6a5204a4.dir
-      size: 1072
+      md5: aba1e2ba5d0cf70b11051db5dcfd4520.dir
+      size: 227596
       nfiles: 1
   log:
-    cmd: python ./src/log_params/log.py ./data/processed/preprocessing_test.csv ./models/cat/catmodel.joblib
+    cmd: python ./src/log_params/log.py ./models/cat/model_test.joblib ./data/processed/preprocessing_test.csv
     deps:
     - path: ./data/processed/preprocessing_test.csv
       hash: md5
-      md5: 2f3b92df9c72f5dfbdd28089a6051ede
-      size: 13331
-    - path: ./models/cat/catmodel.joblib
+      md5: 99deaec1edd821f2961b3d0a5b36e711
+      size: 31696
+    - path: ./models/cat/model_test.joblib
       hash: md5
-      md5: 7d0b11ea9c2ca45e6f56c9e5df9c7ddc
-      size: 14403869
+      md5: df56aa20a64a7240f0970a4901e3a57b
+      size: 227596
     - path: ./src/log_params/log.py
       hash: md5
-      md5: 70d6fc1cf45229c4b18cea3ee5bf8398
-      size: 1278
+      md5: 0dfad5fa6488daface0e8261013ec47d
+      size: 1490

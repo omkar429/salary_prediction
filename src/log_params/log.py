@@ -50,7 +50,7 @@ def main():
     test = load_data(path=data_path)
     X_test = test.drop(columns='remainder__Salaries')
     y_test = test['remainder__Salaries']
-    log_metrics(X_test=X_test,y_test=y_test)
+    log_metrics(X_test=X_test,y_test=y_test,model=model)
 
 
 if __name__ == '__main__':
