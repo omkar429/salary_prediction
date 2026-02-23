@@ -1,5 +1,5 @@
 web_scrap:
-  page_number: 498
+  page_number: 499
 
 database:
   test_size: 0.3
@@ -7,8 +7,9 @@ database:
 
 
 make_model:
+  n_estimators: [100,200,300,400,500]
   iterations: [500,200,300, 1000]
-  depth: [4, 6, 10]
+  depth: [3,4, 6, 10]
   learning_rate: [0.01, 0.05, 0.1]
   l2_leaf_reg: [1, 3, 5]
   border_count: [32, 64, 128]

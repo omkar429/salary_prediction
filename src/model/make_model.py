@@ -15,15 +15,14 @@ def load_data(path: str) -> pd.DataFrame:
 
 def make_pairam(iterations,depth,learning_rate,l2_leaf_reg,border_count):
     pairamiter_grid = {
+        # 'n_estimators':n_estimators,
         'iterations':iterations,
         'depth': depth,
         'learning_rate':learning_rate,
         'l2_leaf_reg': l2_leaf_reg,
         'border_count': border_count
-        
 
     }
-    print(pairamiter_grid)
     return pairamiter_grid
 
 
