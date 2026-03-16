@@ -8,6 +8,7 @@ import sys
 import pickle
 import yaml
 from catboost import CatBoostRegressor
+import mlflow.catboost 
 
 
 def load_model(path: str) -> pd.DataFrame:
@@ -30,6 +31,8 @@ def log_metrics(model, X_test, y_test, path) -> None:
         mae = mean_absolute_error(y_test,y_pre)
         mse = mean_squared_error(y_test,y_pre)
         rmse = np.sqrt(mse)
+        mlflow.catboost.log_model(model)
+        mlflow.log_artifact(__file__)
 
         mlflow.log_param('web_scrap',path['web_scrap']['page_number'])
         mlflow.log_param('test_size',path['database']['test_size'])

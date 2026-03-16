@@ -78,7 +78,7 @@ stages:
           - 300
           - 1000
           depth:
-          - 3
+          - 2
           - 4
           - 6
           - 10
@@ -97,8 +97,8 @@ stages:
     outs:
     - path: ./models/cat/
       hash: md5
-      md5: 789f5a85f1db1438c532aa717d29d16b.dir
-      size: 15575846
+      md5: 784c1bf855e513c39b5578709b100a6c.dir
+      size: 7962902
       nfiles: 1
   log:
     cmd: python ./src/log_params/log.py ./models/cat/model_test.joblib 
@@ -110,9 +110,9 @@ stages:
       size: 116496
     - path: ./models/cat/model_test.joblib
       hash: md5
-      md5: f1736c4159d8e72cf24e6ee23d62fc5e
-      size: 15575846
+      md5: 9a25445acb168986b00f3846c9afc8a7
+      size: 7962902
     - path: ./src/log_params/log.py
       hash: md5
-      md5: 9a0d47f19efe11bbecd6c6ee2c4187b9
-      size: 2178
+      md5: 546ef4ec81640597bf02877810f6c0d9
+      size: 2284

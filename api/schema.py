@@ -1,0 +1,80 @@
+from pydantic import BaseModel, Field, field_validator, model_validator
+from typing import Annotated, Literal
+from fastapi import FastAPI
+from sklearn.preprocessing import OneHotEncoder
+import numpy as np
+import pandas as pd
+
+
+# ['company_reviews', 'Reviews', 'Salaries', 'Interviews',
+#        'jobs', 'Benefits', 'photos'],
+
+
+class userInput(BaseModel):
+    company_reviews: Annotated[float, Field(..., gt=0,description='Enter the company reviews')]
+    Reviews: Annotated[float, Field(..., gt=0, description="Enter Reviews in company")]
+    Salaries: Annotated[float, Field(..., gt=0, description='Enter Avg salary in company')]
+    Interviews: Annotated[int, Field(..., gt=0, description='Enter intervices in compay')]
+    jobs: Annotated[int, Field(..., gt=0, description='Enter the jobs in company')]
+    Benefits: Annotated[int, Field(..., gt=0, description='Enter benefits in company')]
+    photos: Annotated[int, Field(..., description='Enter who many photos persent on websites')]
+    company_reviews_encoded: 'np.ndarray | None' = None  
+
+    model_config = dict(arbitrary_types_allowed=True)
+    @field_validator('company_reviews')
+    @classmethod
+    def company_reviews(cls, value):
+         
+         if value > 4:
+            return 'excellent'
+         elif value < 4 and value > 3:
+            return 'good'
+         else:
+            return 'Poor' 
+         
+    @model_validator(mode='after')
+    @property
+    def oneHotEncoder(self):
+        encoder = OneHotEncoder(categories=[['excellent','good','Poor']],drop='first',sparse_output=False)
+        catogery = np.array(self.company_reviews).reshape(-1,1)
+        encoder.fit(np.array(['excellent','good','Poor']).reshape(-1,1))
+        self.company_reviews_encoded = encoder.transform(catogery)
+        return self
+    
+
+
+
+
+data = {
+ 'company_reviews': 4.0,
+ 'Reviews': 127,
+ 'Salaries': 340,
+ 'Interviews': 11,
+ 'jobs': 2,
+ 'Benefits': 4,
+ 'photos': 4
+}
+
+a = userInput(**data)
+
+
+def change_OnehotEncoder(data):
+    data1 = data.model_dump(exclude=['company_reviews_encoded','company_reviews'])
+    data2 = data.model_dump(include=['company_reviews_encoded'])
+
+    data1['company_reviews_encoded1'] = data2['company_reviews_encoded'][0][0]
+    data1['company_reviews_encoded2'] = data2['company_reviews_encoded'][0][1]
+
+    df = pd.DataFrame(data1, index=[0])
+    col1 = df.pop('company_reviews_encoded1')
+    col2 = df.pop('company_reviews_encoded2')
+    df.insert(0, 'company_reviews_encoded1', col1)
+    df.insert(1, 'company_reviews_encoded2', col2)
+
+    return df
+
+df = change_OnehotEncoder(data=a)
+print(df)
+
+
+
