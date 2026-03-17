@@ -30,5 +30,8 @@ def predict(data: userInput):
     vailidate_data = change_OnehotEncoder(data=data)
     pr_valu = model.predict(vailidate_data)
     return JSONResponse(status_code=201, content=pr_valu.tolist())
+
+
+#final
     
 
