@@ -1,8 +1,7 @@
 schema: '2.0'
 stages:
   database:
-    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv 
-      ./data/harf_prose/
+    cmd: python ./src/data_ing_database/database.py ./data/raw/web_data.csv ./data/harf_prose/
     deps:
     - path: ./data/raw/web_data.csv
       hash: md5
@@ -14,21 +13,21 @@ stages:
       size: 2399
     params:
       params.yaml:
-        database.random_state: 45
+        database.random_state: 42
         database.test_size: 0.3
     outs:
     - path: data/harf_prose/
       hash: md5
-      md5: f7b89185722959fbad60209f75c6ad2a.dir
+      md5: 1594c6be5f39c949de8b40e55418a86a.dir
       size: 422232
       nfiles: 2
   preprocessing:
-    cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv 
-      ./data/harf_prose/test.csv ./data/processed/
+    cmd: python ./src/data_prepro/preprocessing.py ./data/harf_prose/train.csv ./data/harf_prose/test.csv
+      ./data/processed/
     deps:
     - path: ./data/harf_prose/
       hash: md5
-      md5: f7b89185722959fbad60209f75c6ad2a.dir
+      md5: 1594c6be5f39c949de8b40e55418a86a.dir
       size: 422232
       nfiles: 2
     - path: ./src/data_prepro/preprocessing.py
@@ -38,7 +37,7 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: 6aefd440867071d101c46a822bb7359f.dir
+      md5: be5505e59dd13e93ec287d282685edef.dir
       size: 388090
       nfiles: 2
   web_scrap:
@@ -52,13 +51,13 @@ stages:
       params.yaml:
         web_scrap.page_number: 499
   make_model:
-    cmd: python ./src/model/make_model.py 
-      ./data/processed/preprocessing_train.csv ./models/cat
+    cmd: python ./src/model/make_model.py ./data/processed/preprocessing_train.csv
+      ./models/cat
     deps:
     - path: ./data/processed/preprocessing_train.csv
       hash: md5
-      md5: 318a2feb406662639bfb28be24cfe251
-      size: 271594
+      md5: dd1b4730bf800fb9c9d85471f1f8d730
+      size: 271476
     - path: ./src/model/make_model.py
       hash: md5
       md5: 6599549f02fc9fb6eea9c8e7a970af57
@@ -88,8 +87,8 @@ stages:
           - 0.1
           l2_leaf_reg:
           - 1
-          - 3
           - 5
+          - 10
           border_count:
           - 32
           - 64
@@ -97,21 +96,20 @@ stages:
     outs:
     - path: ./models/cat/
       hash: md5
-      md5: 784c1bf855e513c39b5578709b100a6c.dir
-      size: 7962902
+      md5: 25df21fe7f88e8c327e1ae9c31332010.dir
+      size: 122957
       nfiles: 1
   log:
-    cmd: python ./src/log_params/log.py ./models/cat/model_test.joblib 
-      ./data/processed/preprocessing_test.csv
+    cmd: python ./src/log_params/log.py ./models/cat/model_test.joblib ./data/processed/preprocessing_test.csv
     deps:
     - path: ./data/processed/preprocessing_test.csv
       hash: md5
-      md5: 691b98ea728a0398b6612fdd75060405
-      size: 116496
+      md5: 669687de24724755edbadc6e9a00f890
+      size: 116614
     - path: ./models/cat/model_test.joblib
       hash: md5
-      md5: 9a25445acb168986b00f3846c9afc8a7
-      size: 7962902
+      md5: 443f353b537609f0f07f99eb4aaa97f5
+      size: 122957
     - path: ./src/log_params/log.py
       hash: md5
       md5: 546ef4ec81640597bf02877810f6c0d9
