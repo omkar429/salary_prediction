@@ -48,9 +48,10 @@ jobs:
             aws configure set default.region ap-south-1
 
             aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 563364226105.dkr.ecr.ap-south-1.amazonaws.com
-            docker pull 563364226105.dkr.ecr.ap-south-1.amazonaws.com/salary-predction:latest
             docker stop my-app || true
             docker rm my-app || true
+            docker image prune -f
+            docker pull 563364226105.dkr.ecr.ap-south-1.amazonaws.com/salary-predction:latest
             docker run -d -p 5000:8000 --name my-app 563364226105.dkr.ecr.ap-south-1.amazonaws.com/salary-predction:latest
 
 
