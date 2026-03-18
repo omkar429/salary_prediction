@@ -24,8 +24,19 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.SECRET_ACCESS_KEY_2 }}
           aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 563364226105.dkr.ecr.ap-south-1.amazonaws.com
 
+      - name: build docker 
+        run: |
+          docker build -t salary-predction .
+      - name: docker tag
+        run: |
+          docker tag salary-predction:latest 563364226105.dkr.ecr.ap-south-1.amazonaws.com/salary-predction:latest
+      - name: push to ecr
+        run: |
+          docker push 563364226105.dkr.ecr.ap-south-1.amazonaws.com/salary-predction:latest
 
-# add nothgin
+
+
+
 
 
 
