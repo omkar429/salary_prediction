@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
@@ -15,5 +15,5 @@ COPY models/ ./models
 
 EXPOSE 8000
 
-# run app
+# run app run
 CMD ["python", "-m", "uvicorn", "api.main:app", "--host" , "0.0.0.0", "--port", "8000" ]

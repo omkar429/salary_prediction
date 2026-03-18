@@ -25,7 +25,14 @@ def load_model(path: str):
 
 
 
+# def model_path():
+#     home_path = pathlib.Path(__file__).parent.parent
+#     model_path = home_path / 'models/cat/model_test.joblib'
+#     return model_path
+
+
 def model_path():
-    home_path = pathlib.Path(__file__).parent.parent
-    model_path = home_path / 'models/cat/model_test.joblib'
-    return model_path
+    return pathlib.Path("/app/models/cat/model_test.joblib")
+
+
+
