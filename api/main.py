@@ -32,6 +32,7 @@ def predict(data: userInput):
     return JSONResponse(status_code=201, content=pr_valu.tolist())
 
 
-#final
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000, debug=True)
     
 
