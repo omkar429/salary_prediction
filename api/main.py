@@ -16,6 +16,10 @@ app = FastAPI()
 def home():
     return {'message': 'This is the home url of salary_prediction API'}
 
+@app.get('/hello')
+def hello():
+    return {'message': 'Hello'}
+
 
 @app.get('/detail')
 def detail():
