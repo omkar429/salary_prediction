@@ -10,7 +10,7 @@ RUN pip install -r requirements.txt
 
 
 COPY api/ ./api
-COPY models/ /app
+COPY models/ ./models/
 
 
 EXPOSE 8000
